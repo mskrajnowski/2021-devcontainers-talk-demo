@@ -4,6 +4,8 @@ locals {
 
 resource "aws_s3_bucket" "web_app" {
   bucket = "${local.project}-web-app"
+
+  force_destroy = true
 }
 
 module "cloudfront_origin_web_app" {
