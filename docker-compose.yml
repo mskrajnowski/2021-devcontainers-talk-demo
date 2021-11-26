@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: ./web
+      target: dev
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      # Mount the project code
+      - "./:/opt/devcontainers-demo/:cached"
+      # Preserve home directory for settings and shell history
+      - "web_home:/home/node"
+      # Provide AWS credentials
+      - "$HOME/.aws:/home/node/.aws"
+    env_file:
+      - .env
+
+  infrastructure:
+    build:
+      context: ./infrastructure
+      target: dev
+    command: "false"
+    volumes:
+      - "./:/opt/devcontainers-demo/:cached"
+      - "infrastructure_home:/home/dev"
+      - "$HOME/.aws:/home/dev/.aws"
+    env_file:
+      - .env
+
+volumes:
+  web_home:
+  infrastructure_home:

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+deploy_bucket=devcontainers-demo-web-app
+
+# Build the app
+npm run build
+
+# Push the build to S3
+aws s3 sync \
+  build/static s3://${deploy_bucket}/static/ \
+  --cache-control 'public,max-age=31536000'
+
+aws s3 sync \
+  build s3://${deploy_bucket}/ \
+  --exclude '*' \
+  --include 'favicon.ico' \
+  --include 'manifest.json' \
+  --cache-control 'public,max-age=3600'
+
+aws s3 sync \
+  build s3://${deploy_bucket}/ \
+  --exclude 'static/*' \
+  --exclude 'favicon.ico' \
+  --exclude 'manifest.json' \
+  --cache-control 'public,no-cache,no-store,must-revalidate'

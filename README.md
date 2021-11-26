@@ -15,7 +15,13 @@ The backend uses redis for storage and pub/sub.
 1. Install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. Install [docker](https://docs.docker.com/get-docker/)
 3. Install [docker-compose](https://docs.docker.com/compose/install/)
-4. Run the entire stack locally with `docker-compose`
+4. Setup your local `.env`
+
+   ```sh
+   cp .env.template .env
+   ```
+
+5. Run the entire stack locally with `docker-compose`
 
    ```sh
    docker-compose up
