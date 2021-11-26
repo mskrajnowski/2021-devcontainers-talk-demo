@@ -1,0 +1,7 @@
+#/usr/bin/bash
+
+set -euo pipefail
+
+# Your local modifications, e.g.
+# apt-get update
+# apt-get install -y --no-install-recommends zsh

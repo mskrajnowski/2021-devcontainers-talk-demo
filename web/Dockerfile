@@ -46,4 +46,8 @@ CMD npm run build
 # Prepare an image for developing the application, based on the builder image
 FROM builder as dev
 
+USER root
+RUN test -f docker.local.sh && bash docker.local.sh
+USER node
+
 CMD npm run start
